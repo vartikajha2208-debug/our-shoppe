@@ -6,243 +6,184 @@
   <title>Lyf Shoppe • Product Catalog</title>
   <meta name="description" content="Lyf Shoppe product portfolio – browse categories and sub‑products across anesthesia, central sterile, lab supplies, OR/surgical, and pharmacy." />
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
     :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --muted: #334155;
-      --text: #e5e7eb;
-      --accent: #22d3ee;
-      --accent-2: #a78bfa;
-      --ring: rgba(34, 211, 238, 0.3);
-      --card: #0b1220;
-      --border: #1f2937;
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --border: #e5e9f2;
+      --text: #0b1f33;
+      --muted: #5a6b85;
+      --brand: #0b6efd;
+      --brand-dark: #084db9;
+      --chip: #eef5ff;
+      --shadow: 0 6px 24px rgba(18, 38, 63, 0.06);
     }
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text);
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(167,139,250,.15), transparent 60%),
-                  radial-gradient(800px 400px at 10% -10%, rgba(34,211,238,.18), transparent 55%),
-                  var(--bg);
-      line-height: 1.55;
-    }
-    a { color: var(--accent); text-decoration: none; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:var(--bg); color:var(--text); line-height:1.5; }
+    a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .container { width: min(1150px, 92vw); margin: 0 auto; }
-    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(8px); background: rgba(15,23,42,.6); border-bottom: 1px solid var(--border); }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 12px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
-    .brand img { height: 40px; border-radius: 6px; }
-    .navlinks { display: flex; gap: 14px; flex-wrap: wrap; }
-    .navlinks a { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: rgba(17,24,39,.7); }
-    .navlinks a:hover { background: rgba(17,24,39,1); }
-    .hero { padding: 64px 0 28px; text-align: center; }
-    .hero h1 { font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; margin: 12px 0 10px; }
-    .hero p { color: #cbd5e1; margin: 8px auto 18px; width: min(850px, 90%); }
-    .stat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(17,24,39,.7); }
-    .searchbar { margin: 26px auto 8px; display: flex; gap: 10px; width: min(720px, 94vw); }
-    .searchbar input { flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #0b1220; color: var(--text); outline: none; }
-    .searchbar input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 52px; }
-    .card { background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border: 1px solid var(--border); border-radius: 18px; padding: 18px; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
-    .card:hover { transform: translateY(-2px); border-color: rgba(167,139,250,.45); box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(167,139,250,.2); }
-    .card h3 { margin: 6px 0 6px; font-size: 18px; }
-    .card p { margin: 0 0 12px; color: #cbd5e1; min-height: 42px; }
-    details { border: 1px solid var(--border); border-radius: 14px; background: #0b1220; padding: 10px 12px; }
-    summary { cursor: pointer; list-style: none; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    summary::marker { display: none; }
-    .chev { transition: transform .2s ease; }
-    details[open] .chev { transform: rotate(90deg); }
-    ul.items { margin: 10px 0 4px 0; padding-left: 18px; }
-    ul.items li { padding: 6px 0; }
-    footer { border-top: 1px solid var(--border); padding: 28px 0 48px; color: #94a3b8; text-align: center; }
-    .small { font-size: 12px; color: #94a3b8; }
-    .badge { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; background: rgba(34,211,238,.12); border: 1px solid rgba(34,211,238,.35); color: #cffafe; }
-    .muted { color: #a3b3c6; }
+    header { position: sticky; top: 0; z-index: 30; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
+    .wrap { width: min(1200px, 94vw); margin: 0 auto; }
+    .topbar { display:flex; align-items:center; gap:16px; padding:12px 0; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size:18px; }
+    .brand img { height:36px; border-radius:4px; }
+    .toplinks { margin-left:auto; display:flex; align-items:center; gap:16px; }
+    .search input { width: min(420px, 60vw); padding:10px 12px; border-radius:10px; border:1px solid var(--border); background:#f9fbff; }
+    .search input:focus { outline:2px solid #dbeafe; border-color:#bfdbfe; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 12px; background:var(--brand); color:#fff; border-radius:10px; border:1px solid #0a58ca; text-decoration:none; font-weight:600; }
+    .btn:hover { background: var(--brand-dark); }
+    .layout { display:grid; grid-template-columns:270px 1fr; gap:20px; padding:22px 0; }
+    @media (max-width:920px) { .layout { grid-template-columns:1fr; } .toplinks{flex-wrap:wrap;} }
+    .sidebar { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px; box-shadow:var(--shadow); height:fit-content; position:sticky; top:78px; }
+    .sidebar h3 { margin:0 0 8px; font-size:16px; color:var(--muted); font-weight:600; }
+    .side-list { list-style:none; padding:0; margin:0; }
+    .side-list li { margin:4px 0; }
+    .side-link { display:block; padding:10px 12px; border-radius:10px; border:1px solid transparent; }
+    .side-link.active, .side-link:hover { background:var(--chip); border-color:#dbeafe; text-decoration:none; }
+    .panel { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); }
+    .hero { padding:8px 12px 14px; border-bottom:1px solid var(--border); }
+    .hero h1 { margin:6px 0 4px; font-size: clamp(22px, 3.8vw, 32px); }
+    .stat { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:var(--chip); border:1px solid #dbeafe; color:#1d4ed8; font-weight:600; }
+    .lead { color:var(--muted); margin:6px 0 0; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:14px; padding-top:16px; }
+    .card { border:1px solid var(--border); border-radius:14px; padding:14px; background:#fff; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px; }
+    .card h4 { margin:0; font-size:16px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { display:inline-block; padding:8px 12px; border-radius:999px; background:var(--chip); border:1px solid #dbeafe; font-size:12px; color:#1f3b73; }
+    .chip:hover { background:#e6f0ff; }
+    footer { margin:26px 0 40px; color:#5a6b85; font-size:14px; }
+    .footgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    @media(max-width:720px){.footgrid{grid-template-columns:1fr}}
+    .footpanel{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px; box-shadow:var(--shadow)}
   </style>
 </head>
 <body>
   <header>
-    <div class="container nav">
-      <div class="brand" aria-label="Brand">
-        <!-- IMPORTANT: Your uploaded file name is LOGO.jpg (uppercase). Keep it exactly the same here. -->
+    <div class="wrap topbar">
+      <div class="brand">
         <img src="LOGO.jpg" alt="Lyf Shoppe Logo" />
-        <div>Lyf Shoppe</div>
+        <span>Lyf Shoppe</span>
       </div>
-      <nav class="navlinks" aria-label="Primary Navigation">
-        <a href="#anesthesia">Anesthesia</a>
-        <a href="#central-sterile">Central Sterile</a>
-        <a href="#lab-supplies">Lab Supplies</a>
-        <a href="#or-surgical">OR / Surgical</a>
-        <a href="#pharmacy">Pharmacy</a>
-      </nav>
+      <div class="toplinks">
+        <a class="btn" href="#contact">Contact</a>
+        <div class="search" role="search">
+          <input id="searchBox" type="search" placeholder="Search sub‑products (e.g., Blood Collection Tubes)" aria-label="Search sub-products" />
+        </div>
+      </div>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero" id="top">
-      <span class="stat"><strong>100,000+</strong> medical products</span>
-      <h1>Comprehensive Medical Product Catalog</h1>
-      <p class="muted">Explore our portfolio across anesthesia, central sterile, lab supplies, OR/surgical, and pharmacy. Click a category to reveal sub‑products. Use search to quickly find an item.</p>
-      <div class="searchbar">
-        <input id="search" type="search" placeholder="Search sub‑products (e.g., ‘Blood Collection Tubes’)" />
+  <main class="wrap layout">
+    <aside class="sidebar" aria-label="Product categories">
+      <h3>Browse Categories</h3>
+      <ul class="side-list" id="sideList">
+        <li><a class="side-link active" href="#" data-cat="Anesthesia">Anesthesia</a></li>
+        <li><a class="side-link" href="#" data-cat="Central Sterile">Central Sterile</a></li>
+        <li><a class="side-link" href="#" data-cat="Lab Supplies">Lab Supplies</a></li>
+        <li><a class="side-link" href="#" data-cat="OR / Surgical">OR / Surgical</a></li>
+        <li><a class="side-link" href="#" data-cat="Pharmacy">Pharmacy</a></li>
+      </ul>
+    </aside>
+
+    <section class="panel">
+      <div class="hero">
+        <span class="stat">100,000+ medical products</span>
+        <h1 id="title">Anesthesia</h1>
+        <p class="lead" id="tagline">We handle the products so you can concentrate on the patient.</p>
       </div>
-    </section>
 
-    <!-- ==================== CATEGORIES GRID ==================== -->
-    <section class="grid" aria-label="Product Categories">
-      <!-- Anesthesia -->
-      <article class="card" id="anesthesia">
-        <div class="badge">Category</div>
-        <h3>Anesthesia</h3>
-        <p>We handle the products so you can concentrate on the patient.</p>
-        <details data-category="Anesthesia">
-          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
-          <ul class="items" data-list>
-            <li><a href="#" data-name="General Anesthesia">General Anesthesia</a></li>
-            <li><a href="#" data-name="Monitored Anesthesia">Monitored Anesthesia</a></li>
-            <li><a href="#" data-name="Pain Management">Pain Management</a></li>
-            <li><a href="#" data-name="Regional Anesthesia">Regional Anesthesia</a></li>
-          </ul>
-        </details>
-      </article>
+      <div id="products" class="grid" aria-live="polite"></div>
+      <div id="emptyMsg" class="empty" style="display:none;">No items match your search.</div>
 
-      <!-- Central Sterile -->
-      <article class="card" id="central-sterile">
-        <div class="badge">Category</div>
-        <h3>Central Sterile</h3>
-        <p>Maintain stringent standards with fully compliant tools.</p>
-        <details data-category="Central Sterile">
-          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
-          <ul class="items" data-list>
-            <li><a href="#" data-name="Sterilization Monitoring Products">Sterilization Monitoring Products</a></li>
-            <li><a href="#" data-name="Sterilization Pouches">Sterilization Pouches</a></li>
-            <li><a href="#" data-name="Sterilization Wrap">Sterilization Wrap</a></li>
-          </ul>
-        </details>
-      </article>
-
-      <!-- Lab Supplies -->
-      <article class="card" id="lab-supplies">
-        <div class="badge">Category</div>
-        <h3>Lab Supplies</h3>
-        <p>Stock up on all the lab supplies that you rely on.</p>
-        <details data-category="Lab Supplies">
-          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
-          <ul class="items" data-list>
-            <li><a href="#" data-name="Blood Collection Needles">Blood Collection Needles</a></li>
-            <li><a href="#" data-name="Blood Collection Sets">Blood Collection Sets</a></li>
-            <li><a href="#" data-name="Blood Collection Tubes">Blood Collection Tubes</a></li>
-            <li><a href="#" data-name="Specimen Sample Collection">Specimen Sample Collection</a></li>
-          </ul>
-        </details>
-      </article>
-
-      <!-- OR / Surgical -->
-      <article class="card" id="or-surgical">
-        <div class="badge">Category</div>
-        <h3>OR / Surgical</h3>
-        <p>Minimize delays with on‑time delivery of essential OR supplies.</p>
-        <details data-category="OR / Surgical">
-          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
-          <ul class="items" data-list>
-            <li><a href="#" data-name="Cath Labs">Cath Labs</a></li>
-            <li><a href="#" data-name="Chest Drains">Chest Drains</a></li>
-            <li><a href="#" data-name="Skin Prep and Scrub Solutions">Skin Prep and Scrub Solutions</a></li>
-            <li><a href="#" data-name="Sterile Procedure Packs">Sterile Procedure Packs</a></li>
-            <li><a href="#" data-name="Surgical Drapes and Gowns">Surgical Drapes and Gowns</a></li>
-          </ul>
-        </details>
-      </article>
-
-      <!-- Pharmacy -->
-      <article class="card" id="pharmacy">
-        <div class="badge">Category</div>
-        <h3>Pharmacy</h3>
-        <p>We have what you need – Always Stocked. Always Ready.</p>
-        <details data-category="Pharmacy">
-          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
-          <ul class="items" data-list>
-            <li><a href="#" data-name="Over-the-Counter Drugs">Over‑the‑Counter Drugs</a></li>
-            <li><a href="#" data-name="Prescription Drugs">Prescription Drugs <span class="small muted">(hard‑to‑find & shortage)</span></a></li>
-            <li><a href="#" data-name="Pharmacy Supply">Pharmacy Supply</a></li>
-          </ul>
-        </details>
-      </article>
-    </section>
-
-    <section class="card" style="margin-bottom: 40px;">
-      <h3>About this Catalog</h3>
-      <p class="muted">Each sub‑product is a placeholder link. To point these to real pages, create files under <code>products/&lt;category&gt;/</code> and change each <code>href="#"</code> to your new path. Example: <code>products/anesthesia/general-anesthesia.html</code>.</p>
+      <div id="contact" style="margin-top:32px"></div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div>© <span id="year"></span> Lyf Shoppe • Product Portfolio</div>
-      <div class="small">Built for GitHub Pages • Single‑file HTML for easy setup</div>
+  <footer class="wrap">
+    <div class="footgrid">
+      <div class="footpanel">
+        <strong>Lyf Shoppe</strong><br>
+        20860 N. Tatum Blvd. Suite 300<br>
+        Phoenix, AZ 85050
+      </div>
+      <div class="footpanel">
+        <div>Email: <a href="mailto:inbox@lyfshoppe.com">inbox@lyfshoppe.com</a></div>
+        <div>Phone: <a href="tel:+14805768768">(480) 576-8768</a></div>
+      </div>
     </div>
+    <div style="margin-top:12px">© <span id="year"></span> Lyf Shoppe • Product Portfolio</div>
   </footer>
 
   <script>
-    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Simple keyword filter for sub‑products
-    const search = document.getElementById('search');
-    const allDetails = Array.from(document.querySelectorAll('details'));
+    const DATA = {"Anesthesia": ["General Anesthesia", "Monitored Anesthesia", "Pain Management", "Regional Anesthesia"], "Central Sterile": ["Sterilization Monitoring Products", "Sterilization Pouches", "Sterilization Wrap"], "Lab Supplies": ["Blood Collection Needles", "Blood Collection Sets", "Blood Collection Tubes", "Specimen Sample Collection"], "OR / Surgical": ["Cath Labs", "Chest Drains", "Skin Prep and Scrub Solutions", "Sterile Procedure Packs", "Surgical Drapes and Gowns"], "Pharmacy": ["Over-the-Counter Drugs", "Prescription Drugs (hard-to-find & shortage)", "Pharmacy Supply"]};
 
-    const normalize = (s) => s.toLowerCase().trim();
+    const TAGLINES = {
+      'Anesthesia': 'We handle the products so you can concentrate on the patient.',
+      'Central Sterile': 'Maintain stringent standards with fully compliant tools.',
+      'Lab Supplies': 'Stock up on all the lab supplies that you rely on.',
+      'OR / Surgical': 'Minimize delays by partnering with us for on-time delivery of all your essential OR supplies.',
+      'Pharmacy': 'We have what you need - Always Stocked. Always Ready.'
+    };
 
-    function applyFilter(q) {
-      const query = normalize(q);
-      let anyMatch = false;
+    const CONTACT = {"email": "inbox@lyfshoppe.com", "phone": "+14805768768", "display_phone": "(480) 576-8768", "address1": "20860 N. Tatum Blvd. Suite 300", "address2": "Phoenix, AZ 85050"};
 
-      allDetails.forEach(det => {
-        const items = det.querySelectorAll('[data-name]');
-        let categoryHasMatch = false;
+    const title = document.getElementById('title');
+    const tagline = document.getElementById('tagline');
+    const grid = document.getElementById('products');
 
-        items.forEach(link => {
-          const name = normalize(link.getAttribute('data-name'));
-          const match = !query || name.includes(query);
-          link.parentElement.style.display = match ? '' : 'none';
-          if (match) categoryHasMatch = true;
-        });
+    function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+    function linkFor(cat, item) {
+      const base = 'products/' + slug(cat) + '/' + slug(item) + '.html';
+      return base;
+    }
+    function mailtoFor(cat, item){
+      const subject = encodeURIComponent(`Inquiry: ${cat} – ${item}`);
+      const body = encodeURIComponent(
+        `Hello Lyf Shoppe,\n\nI would like to learn more about:\nCategory: ${cat}\nItem: ${item}\n\nMy name:\nCompany/Hospital:\nQuantity (approx):\nNeeded by:\n\nThanks!`
+      );
+      return `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
+    }
 
-        det.open = !!query && categoryHasMatch; // open accordion if search matches
-
-        const card = det.closest('.card');
-        if (query) {
-          card.style.display = categoryHasMatch ? '' : 'none';
-        } else {
-          card.style.display = '';
+    function render(cat, query='') {
+      title.textContent = cat;
+      tagline.textContent = TAGLINES[cat];
+      const q = query.toLowerCase();
+      grid.innerHTML = '';
+      DATA[cat].forEach(name => {
+        if (!q || name.toLowerCase().includes(q)) {
+          const href = linkFor(cat, name);
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <h4><a href="${href}">${name}</a></h4>
+            <div class="chips">
+              <a class="chip" href="${href}">Learn more</a>
+              <a class="chip" href="${mailtoFor(cat,name)}">Request quote</a>
+              <a class="chip" href="tel:${CONTACT.phone}">Call</a>
+              <a class="chip" href="#contact">Contact details</a>
+            </div>`;
+          grid.appendChild(card);
         }
-
-        if (categoryHasMatch) anyMatch = true;
       });
     }
 
-    search.addEventListener('input', (e) => applyFilter(e.target.value));
+    let current = 'Anesthesia';
+    render(current);
 
-    // Auto‑open the clicked category's sub‑products when using the top nav
-    document.querySelectorAll('.navlinks a').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        // allow normal anchor jump, then open details a moment later
-        setTimeout(() => {
-          const det = document.querySelector(id + ' details');
-          if (det) det.open = true;
-        }, 0);
+    document.querySelectorAll('.side-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.side-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        current = link.dataset.cat;
+        render(current, document.getElementById('searchBox').value);
       });
     });
 
-    // If page loads with a hash (e.g., .../index.html#anesthesia), auto‑open
-    window.addEventListener('load', () => {
-      if (location.hash) {
-        const det = document.querySelector(location.hash + ' details');
-        if (det) det.open = true;
-      }
+    document.getElementById('searchBox').addEventListener('input', (e) => {
+      render(current, e.target.value);
     });
   </script>
 </body>
