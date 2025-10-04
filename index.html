@@ -66,7 +66,8 @@
   <header>
     <div class="container nav">
       <div class="brand" aria-label="Brand">
-        <img src="logo.jpg" alt="Lyf Shoppe Logo" />
+        <!-- IMPORTANT: Your uploaded file name is LOGO.jpg (uppercase). Keep it exactly the same here. -->
+        <img src="LOGO.jpg" alt="Lyf Shoppe Logo" />
         <div>Lyf Shoppe</div>
       </div>
       <nav class="navlinks" aria-label="Primary Navigation">
@@ -89,9 +90,92 @@
       </div>
     </section>
 
-    <!-- Catalog content stays the same -->
-    <!-- (the categories and sub-products remain unchanged as before) -->
+    <!-- ==================== CATEGORIES GRID ==================== -->
+    <section class="grid" aria-label="Product Categories">
+      <!-- Anesthesia -->
+      <article class="card" id="anesthesia">
+        <div class="badge">Category</div>
+        <h3>Anesthesia</h3>
+        <p>We handle the products so you can concentrate on the patient.</p>
+        <details data-category="Anesthesia">
+          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
+          <ul class="items" data-list>
+            <li><a href="#" data-name="General Anesthesia">General Anesthesia</a></li>
+            <li><a href="#" data-name="Monitored Anesthesia">Monitored Anesthesia</a></li>
+            <li><a href="#" data-name="Pain Management">Pain Management</a></li>
+            <li><a href="#" data-name="Regional Anesthesia">Regional Anesthesia</a></li>
+          </ul>
+        </details>
+      </article>
 
+      <!-- Central Sterile -->
+      <article class="card" id="central-sterile">
+        <div class="badge">Category</div>
+        <h3>Central Sterile</h3>
+        <p>Maintain stringent standards with fully compliant tools.</p>
+        <details data-category="Central Sterile">
+          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
+          <ul class="items" data-list>
+            <li><a href="#" data-name="Sterilization Monitoring Products">Sterilization Monitoring Products</a></li>
+            <li><a href="#" data-name="Sterilization Pouches">Sterilization Pouches</a></li>
+            <li><a href="#" data-name="Sterilization Wrap">Sterilization Wrap</a></li>
+          </ul>
+        </details>
+      </article>
+
+      <!-- Lab Supplies -->
+      <article class="card" id="lab-supplies">
+        <div class="badge">Category</div>
+        <h3>Lab Supplies</h3>
+        <p>Stock up on all the lab supplies that you rely on.</p>
+        <details data-category="Lab Supplies">
+          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
+          <ul class="items" data-list>
+            <li><a href="#" data-name="Blood Collection Needles">Blood Collection Needles</a></li>
+            <li><a href="#" data-name="Blood Collection Sets">Blood Collection Sets</a></li>
+            <li><a href="#" data-name="Blood Collection Tubes">Blood Collection Tubes</a></li>
+            <li><a href="#" data-name="Specimen Sample Collection">Specimen Sample Collection</a></li>
+          </ul>
+        </details>
+      </article>
+
+      <!-- OR / Surgical -->
+      <article class="card" id="or-surgical">
+        <div class="badge">Category</div>
+        <h3>OR / Surgical</h3>
+        <p>Minimize delays with on‑time delivery of essential OR supplies.</p>
+        <details data-category="OR / Surgical">
+          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
+          <ul class="items" data-list>
+            <li><a href="#" data-name="Cath Labs">Cath Labs</a></li>
+            <li><a href="#" data-name="Chest Drains">Chest Drains</a></li>
+            <li><a href="#" data-name="Skin Prep and Scrub Solutions">Skin Prep and Scrub Solutions</a></li>
+            <li><a href="#" data-name="Sterile Procedure Packs">Sterile Procedure Packs</a></li>
+            <li><a href="#" data-name="Surgical Drapes and Gowns">Surgical Drapes and Gowns</a></li>
+          </ul>
+        </details>
+      </article>
+
+      <!-- Pharmacy -->
+      <article class="card" id="pharmacy">
+        <div class="badge">Category</div>
+        <h3>Pharmacy</h3>
+        <p>We have what you need – Always Stocked. Always Ready.</p>
+        <details data-category="Pharmacy">
+          <summary><span>Sub‑products</span><span class="chev">▶</span></summary>
+          <ul class="items" data-list>
+            <li><a href="#" data-name="Over-the-Counter Drugs">Over‑the‑Counter Drugs</a></li>
+            <li><a href="#" data-name="Prescription Drugs">Prescription Drugs <span class="small muted">(hard‑to‑find & shortage)</span></a></li>
+            <li><a href="#" data-name="Pharmacy Supply">Pharmacy Supply</a></li>
+          </ul>
+        </details>
+      </article>
+    </section>
+
+    <section class="card" style="margin-bottom: 40px;">
+      <h3>About this Catalog</h3>
+      <p class="muted">Each sub‑product is a placeholder link. To point these to real pages, create files under <code>products/&lt;category&gt;/</code> and change each <code>href="#"</code> to your new path. Example: <code>products/anesthesia/general-anesthesia.html</code>.</p>
+    </section>
   </main>
 
   <footer>
@@ -102,7 +186,64 @@
   </footer>
 
   <script>
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple keyword filter for sub‑products
+    const search = document.getElementById('search');
+    const allDetails = Array.from(document.querySelectorAll('details'));
+
+    const normalize = (s) => s.toLowerCase().trim();
+
+    function applyFilter(q) {
+      const query = normalize(q);
+      let anyMatch = false;
+
+      allDetails.forEach(det => {
+        const items = det.querySelectorAll('[data-name]');
+        let categoryHasMatch = false;
+
+        items.forEach(link => {
+          const name = normalize(link.getAttribute('data-name'));
+          const match = !query || name.includes(query);
+          link.parentElement.style.display = match ? '' : 'none';
+          if (match) categoryHasMatch = true;
+        });
+
+        det.open = !!query && categoryHasMatch; // open accordion if search matches
+
+        const card = det.closest('.card');
+        if (query) {
+          card.style.display = categoryHasMatch ? '' : 'none';
+        } else {
+          card.style.display = '';
+        }
+
+        if (categoryHasMatch) anyMatch = true;
+      });
+    }
+
+    search.addEventListener('input', (e) => applyFilter(e.target.value));
+
+    // Auto‑open the clicked category's sub‑products when using the top nav
+    document.querySelectorAll('.navlinks a').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        // allow normal anchor jump, then open details a moment later
+        setTimeout(() => {
+          const det = document.querySelector(id + ' details');
+          if (det) det.open = true;
+        }, 0);
+      });
+    });
+
+    // If page loads with a hash (e.g., .../index.html#anesthesia), auto‑open
+    window.addEventListener('load', () => {
+      if (location.hash) {
+        const det = document.querySelector(location.hash + ' details');
+        if (det) det.open = true;
+      }
+    });
   </script>
 </body>
 </html>
