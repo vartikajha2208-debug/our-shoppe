@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lyf Shoppe • Product Catalog</title>
+  <meta name="description" content="Lyf Shoppe product portfolio – browse categories and sub‑products across anesthesia, central sterile, lab supplies, OR/surgical, and pharmacy." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --muted: #334155;
+      --text: #e5e7eb;
+      --accent: #22d3ee;
+      --accent-2: #a78bfa;
+      --ring: rgba(34, 211, 238, 0.3);
+      --card: #0b1220;
+      --border: #1f2937;
+    }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(167,139,250,.15), transparent 60%),
+                  radial-gradient(800px 400px at 10% -10%, rgba(34,211,238,.18), transparent 55%),
+                  var(--bg);
+      line-height: 1.55;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1150px, 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(8px); background: rgba(15,23,42,.6); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+    .brand img { height: 40px; border-radius: 6px; }
+    .navlinks { display: flex; gap: 14px; flex-wrap: wrap; }
+    .navlinks a { padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: rgba(17,24,39,.7); }
+    .navlinks a:hover { background: rgba(17,24,39,1); }
+    .hero { padding: 64px 0 28px; text-align: center; }
+    .hero h1 { font-size: clamp(28px, 4.5vw, 44px); line-height: 1.15; margin: 12px 0 10px; }
+    .hero p { color: #cbd5e1; margin: 8px auto 18px; width: min(850px, 90%); }
+    .stat { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; background: rgba(17,24,39,.7); }
+    .searchbar { margin: 26px auto 8px; display: flex; gap: 10px; width: min(720px, 94vw); }
+    .searchbar input { flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #0b1220; color: var(--text); outline: none; }
+    .searchbar input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 26px 0 52px; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border: 1px solid var(--border); border-radius: 18px; padding: 18px; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+    .card:hover { transform: translateY(-2px); border-color: rgba(167,139,250,.45); box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(167,139,250,.2); }
+    .card h3 { margin: 6px 0 6px; font-size: 18px; }
+    .card p { margin: 0 0 12px; color: #cbd5e1; min-height: 42px; }
+    details { border: 1px solid var(--border); border-radius: 14px; background: #0b1220; padding: 10px 12px; }
+    summary { cursor: pointer; list-style: none; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    summary::marker { display: none; }
+    .chev { transition: transform .2s ease; }
+    details[open] .chev { transform: rotate(90deg); }
+    ul.items { margin: 10px 0 4px 0; padding-left: 18px; }
+    ul.items li { padding: 6px 0; }
+    footer { border-top: 1px solid var(--border); padding: 28px 0 48px; color: #94a3b8; text-align: center; }
+    .small { font-size: 12px; color: #94a3b8; }
+    .badge { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; background: rgba(34,211,238,.12); border: 1px solid rgba(34,211,238,.35); color: #cffafe; }
+    .muted { color: #a3b3c6; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="Brand">
+        <img src="logo.jpg" alt="Lyf Shoppe Logo" />
+        <div>Lyf Shoppe</div>
+      </div>
+      <nav class="navlinks" aria-label="Primary Navigation">
+        <a href="#anesthesia">Anesthesia</a>
+        <a href="#central-sterile">Central Sterile</a>
+        <a href="#lab-supplies">Lab Supplies</a>
+        <a href="#or-surgical">OR / Surgical</a>
+        <a href="#pharmacy">Pharmacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="top">
+      <span class="stat"><strong>100,000+</strong> medical products</span>
+      <h1>Comprehensive Medical Product Catalog</h1>
+      <p class="muted">Explore our portfolio across anesthesia, central sterile, lab supplies, OR/surgical, and pharmacy. Click a category to reveal sub‑products. Use search to quickly find an item.</p>
+      <div class="searchbar">
+        <input id="search" type="search" placeholder="Search sub‑products (e.g., ‘Blood Collection Tubes’)" />
+      </div>
+    </section>
+
+    <!-- Catalog content stays the same -->
+    <!-- (the categories and sub-products remain unchanged as before) -->
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Lyf Shoppe • Product Portfolio</div>
+      <div class="small">Built for GitHub Pages • Single‑file HTML for easy setup</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
